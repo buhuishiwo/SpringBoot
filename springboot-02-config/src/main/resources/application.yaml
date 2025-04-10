@@ -1,0 +1,17 @@
+server:
+  port: 8080
+#使用yaml可以给对象赋值，遵循yaml语法
+#yaml支持松散语法，
+dog:
+  name: 狗
+  age: 3
+person:
+  name: 李明
+  age: 3
+  happy: true
+  maps: {k1:v1,k2:v2}
+  lists:
+    - code
+    - music
+    - money
+
