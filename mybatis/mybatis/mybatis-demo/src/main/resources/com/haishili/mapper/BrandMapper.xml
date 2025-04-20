@@ -1,0 +1,132 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!---->
+<mapper namespace="com.haishili.mapper.BrandMapper">
+    <!--数据库列名和实体类属性名不同时，无法自动封装，可以使用resultMap继续映射-->
+    <resultMap id="brandResultMap" type="brand">
+        <!--
+            *column:表的列名
+            *property:实体表的属性名
+        -->
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+    <!--添加-->
+
+    <insert id="addBrand" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand(brand_name,company_name,ordered,description,status)
+        values (#{brandName},#{companyName},#{ordered},#{description},#{status})
+    </insert>
+<!--    修改-->
+    <update id="updateBrand">
+        update tb_brand
+        set brand_name = #{brandName},
+            company_name = #{companyName},
+            ordered = #{ordered},
+            description = #{description},
+            status = #{status}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBrand">
+        delete from tb_brand where id = #{id}
+    </delete>
+
+    <delete id="deleteByIds">
+        delete from tb_brand where id in
+            <!--
+                mybatis自动将传入的参数封装为Map集合
+                key     value
+                array = 数组
+                collection的值就是Map集合的名字
+            -->
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAll" resultMap="brandResultMap">
+        select * from tb_brand;
+    </select>
+    <!--
+        参数匹配方法：
+        1. #{}
+        2. ${}
+        * 这两种方法的区别是默认情况下，使用 #{} 参数语法时，MyBatis 会创建 PreparedStatement 参数占位符，
+        * 并通过占位符安全地设置参数（就像使用 ? 一样）。 这样做更安全，更迅速，通常也是首选做法，
+        * 不过有时你就是想直接在 SQL 语句中直接插入一个不转义的字符串
+        * 比如当表名或列名不确定的情况下，可以使用${}来进行参数拼接，但这样会存在sql注入的问题。
+
+        特殊字符处理：
+        1. 转义字符
+        2. CDATA区
+    -->
+    <select id="selectById" resultMap="brandResultMap">
+        select * from tb_brand where id = #{id};
+    </select>
+<!--    条件查询-->
+<!--    <select id="selectByCondition" resultMap="brandResultMap">-->
+<!--        select *-->
+<!--        from tb_brand-->
+<!--        where status = #{status}-->
+<!--          and brand_name like #{brandName}-->
+<!--          and company_name like #{companyName}-->
+<!--    </select>-->
+    <!--    动态条件查询-->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select *
+        from tb_brand
+            <where>
+                <choose>
+                    <when test="status != null">
+                        status = #{status}
+                    </when>
+                    <when test="brandName != null and brandName !=''">
+                        brand_name like #{brandName}
+                    </when>
+                    <when test="companyName != null and companyName != ''">
+                        company_name like #{companyName}
+                     </when>
+                </choose>
+            </where>
+    </select>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!---->
+<mapper namespace="com.haishili.mapper.BrandMapper">
+    <!--数据库列名和实体类属性名不同时，无法自动封装，可以使用resultMap继续映射-->
+    <resultMap id="brandResultMap" type="brand">
+        <!--
+            *column:表的列名
+            *property:实体表的属性名
+        -->
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+    <select id="selectAll" resultMap="brandResultMap">
+        select * from tb_brand;
+    </select>
+    <!--
+        参数匹配方法：
+        1. #{}
+        2. ${}
+        * 这两种方法的区别是默认情况下，使用 #{} 参数语法时，MyBatis 会创建 PreparedStatement 参数占位符，
+        * 并通过占位符安全地设置参数（就像使用 ? 一样）。 这样做更安全，更迅速，通常也是首选做法，
+        * 不过有时你就是想直接在 SQL 语句中直接插入一个不转义的字符串
+        * 比如当表名或列名不确定的情况下，可以使用${}来进行参数拼接，但这样会存在sql注入的问题。
+
+        特殊字符处理：
+        1. 转义字符
+        2. CDATA区
+    -->
+    <select id="selectById" resultMap="brandResultMap">
+        select * from tb_brand where id = #{id};
+    </select>
+>>>>>>> f5e938b10231c61942ec365ae10582347c038c9b
+</mapper>

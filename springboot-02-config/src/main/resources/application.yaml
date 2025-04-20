@@ -1,0 +1,19 @@
+server:
+  port: 8080
+#spring:
+#  profiles:
+#    active: dev
+#---
+#server:
+#  port: 8081
+#spring:
+#  profiles: dev
+#---
+#server:
+#  port: 8082
+#spring:
+#  profiles: test
+#使用yaml可以给对象赋值，遵循yaml语法
+#yaml支持松散语法
+
+
