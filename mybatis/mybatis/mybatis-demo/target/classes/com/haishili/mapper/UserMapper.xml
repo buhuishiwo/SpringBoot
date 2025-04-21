@@ -1,28 +1,13 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <!---->
 <mapper namespace="com.haishili.mapper.UserMapper">
-    <select id="selectAll" resultType="user">
-        select * from tb_user;
-    </select>
+<!--    <select id="selectAll" resultType="user">-->
+<!--        select * from tb_user;-->
+<!--    </select>-->
     <select id="selectById" resultType="user">
         select * from tb_user where id = #{id};
     </select>
-=======
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-
-<!---->
-<mapper namespace="com.haishili.mapper.UserMapper">
-    <select id="selectAll" resultType="user">
-        select * from tb_user;
-    </select>
-    <select id="selectById" resultType="user">
-        select * from tb_user where id = #{id};
-    </select>
->>>>>>> f5e938b10231c61942ec365ae10582347c038c9b
 </mapper>

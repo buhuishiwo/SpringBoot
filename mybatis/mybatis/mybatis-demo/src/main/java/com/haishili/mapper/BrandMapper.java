@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.haishili.mapper;
 
 import com.haishili.pojo.Brand;
@@ -31,19 +30,4 @@ public interface BrandMapper {
     //@Param()可以指定传入数组的名称
     void deleteByIds(@Param("ids") int[] ids);
 }
-=======
-package com.haishili.mapper;
 
-import com.haishili.pojo.Brand;
-
-import java.util.List;
-
-/**
- * @author haishili
- * @date 2025/4/18
- */
-public interface BrandMapper {
-    List<Brand> selectAll();
-    Brand selectById(int id);
-}
->>>>>>> f5e938b10231c61942ec365ae10582347c038c9b
