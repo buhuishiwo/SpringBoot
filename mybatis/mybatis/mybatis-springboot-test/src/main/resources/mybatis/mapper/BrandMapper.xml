@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!---->
+<mapper namespace="com.haishili.mapper.BrandMapper">
+
+    <resultMap id="brandResultMap" type="Brand">
+        <id property="id" column="id"/>
+        <result property="brandName" column="brand_name"/>
+        <result property="company.companyName" column="company_name"/>
+        <result property="company.cid" column="cid"/>
+        <result property="description" column="description"/>
+        <result property="ordered" column="ordered"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="brandResultMap">
+        select b.*,c.cid from tb_brand b left join tb_company c on b.company_name = c.company_name
+    </select>
+</mapper>

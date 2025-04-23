@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haishili.mapper.EmployeeMapper">
+
+
+    <select id="findAll" resultType="Employee">
+        SELECT
+            e.id,
+            e.lastname AS lastName,
+            e.email,
+            e.deptid AS deptId,
+            e.gender,
+            e.birthday,
+            d.name AS deptName
+        FROM tb_emp e
+                 LEFT JOIN tb_dept d ON e.deptid = d.deptid
+    </select>
+
+    <select id="findById" >
+
+    </select>
+</mapper>

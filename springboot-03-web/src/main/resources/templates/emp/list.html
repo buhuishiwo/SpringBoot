@@ -73,7 +73,7 @@
 									<td th:text="${emp.getLastname()}"></td>
 									<td th:text="${emp.getGender() == 1 ? '男':'女'}"></td>
 									<td th:text="${emp.getEmail()}"></td>
-									<td th:text="${emp.getDepartment().getName()}"></td>
+									<td th:text="${emp.getDeptName()}"></td>
 									<td th:text="${#dates.format(emp.getBirthday(),'yyyy/MMM/dd')}"></td>
 									<td>
 										<button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">删除</button>

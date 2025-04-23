@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface DepartmentMapper {
-    @Select("select * from tb_dept;")
+
     List<Department> findAll();
-    @Select("select * from tb_dept where id = #{id};")
+
     Department findById(Integer id);
 }
