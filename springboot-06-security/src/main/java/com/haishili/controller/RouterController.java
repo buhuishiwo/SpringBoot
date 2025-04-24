@@ -15,7 +15,7 @@ public class RouterController {
     public String index() {
         return "index";
     }
-    @RequestMapping("/toLogin")
+    @RequestMapping("/login")
     public String toLogin() {
         return "views/login";
     }
@@ -31,8 +31,8 @@ public class RouterController {
     public String view3(@PathVariable("id") int id) {
         return "views/level3/"+id;
     }
-    @PostMapping("/login")
-    public String login() {
-        return "index";
-    }
+//    @PostMapping("/login")
+//    public String login() {
+//        return "index";
+//    }
 }

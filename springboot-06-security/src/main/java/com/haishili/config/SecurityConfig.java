@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 /**
  * @author haishili
@@ -33,7 +34,13 @@ public class SecurityConfig  {
                         .requestMatchers("/level3/**").hasRole("vip3")
                         .anyRequest().authenticated()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        //一定要设置登录成功跳转链接，否则会出现跳转到其他页面的情况
+                        .successForwardUrl("/")
+                        .permitAll()
+                )
                 //此方法已被废弃
                 //.logout();
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
@@ -47,11 +54,13 @@ public class SecurityConfig  {
                 .username("vip1")
                 .password(passwordEncoder().encode("123456"))
                 .roles("vip1")
+                .build();
+        UserDetails vip2 = User.builder()
                 .username("vip2")
                 .password(passwordEncoder().encode("1234567"))
                 .roles("vip2")
                 .build();
-        return new InMemoryUserDetailsManager(vip1);
+        return new InMemoryUserDetailsManager(vip1,vip2);
     }
 
     @Bean
