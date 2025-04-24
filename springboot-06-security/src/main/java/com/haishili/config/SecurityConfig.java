@@ -2,6 +2,7 @@ package com.haishili.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -26,18 +27,17 @@ public class SecurityConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorizeRequests ->authorizeRequests
-                        .requestMatchers("/","/toLogin").permitAll()
-                        .requestMatchers("/level1/**").hasRole("vip1")
+                        .requestMatchers("/","/toLogin","/logout").permitAll()
+                        .requestMatchers("/level1/**").hasAnyRole("vip1","vip2")
                         .requestMatchers("/level2/**").hasRole("vip2")
                         .requestMatchers("/level3/**").hasRole("vip3")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/toLogin")             // 自定义登录页
-                        .loginProcessingUrl("/login")     // 登录提交路径
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error=true")
-                        .permitAll()
-                );
+                .formLogin(Customizer.withDefaults())
+                //此方法已被废弃
+                //.logout();
+                .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
 
@@ -47,6 +47,9 @@ public class SecurityConfig  {
                 .username("vip1")
                 .password(passwordEncoder().encode("123456"))
                 .roles("vip1")
+                .username("vip2")
+                .password(passwordEncoder().encode("1234567"))
+                .roles("vip2")
                 .build();
         return new InMemoryUserDetailsManager(vip1);
     }
