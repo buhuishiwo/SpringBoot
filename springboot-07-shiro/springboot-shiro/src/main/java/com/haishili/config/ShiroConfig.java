@@ -20,16 +20,11 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/user/add", "authc");
-        filterChainDefinitionMap.put("/user/update", "authc");
-
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        return shiroFilterFactoryBean;
+    public ShiroFilterChainDefinition shiroFilterChainDefinition() {
+        DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
+        chain.addPathDefinition("/add", "authc");
+        chain.addPathDefinition("/update", "authc");
+        return chain;
     }
 
 //    @Bean
@@ -43,12 +38,12 @@ public class ShiroConfig {
 //        return chainDefinition;
 //    }
 
-    @Bean
-    public DefaultWebSecurityManager securityManager(MyRealm myRealm) {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myRealm);
-        return securityManager;
-    }
+//    @Bean
+//    public DefaultWebSecurityManager securityManager(MyRealm myRealm) {
+//        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+//        securityManager.setRealm(myRealm);
+//        return securityManager;
+//    }
 
     @Bean
     public MyRealm myRealm() {
