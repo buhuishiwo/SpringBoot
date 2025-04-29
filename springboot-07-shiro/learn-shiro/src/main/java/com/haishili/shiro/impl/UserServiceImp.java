@@ -1,6 +1,6 @@
 package com.haishili.shiro.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
 import com.haishili.shiro.entity.User;
 import com.haishili.shiro.mapper.UserMapper;
 import com.haishili.shiro.service.UserService;
@@ -19,8 +19,6 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User findByname(String name) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name", name);
-        return userMapper.selectOne(queryWrapper);
+        return userMapper.findByName(name);
     }
 }

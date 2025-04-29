@@ -12,6 +12,12 @@
         <module>springboot-shiro</module>
         <module>learn-shiro</module>
     </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.5</version>
+        <relativePath/> <!-- 显式声明不从本地查找 -->
+    </parent>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
