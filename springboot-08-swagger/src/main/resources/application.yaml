@@ -1,0 +1,5 @@
+spring.application.name: springboot-08-swagger
+springdoc:
+  packages-to-scan: com.haishili.controller
+  api-docs:
+    enabled: true
