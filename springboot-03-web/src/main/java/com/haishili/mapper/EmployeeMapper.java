@@ -17,11 +17,11 @@ public interface EmployeeMapper {
     List<Employee> findAll();
 
 //    @Insert("insert into tb_emp(id,lastname,email,gender,department,birthday) values (#{id},#{lastname},#{email},#{gender},#{department},#{birthday})")
-//    int addEmployee(Employee employee);
+    int addEmployee(Employee employee);
 //
 //    @Update("")
-//    int updateEmployee(Employee employee);
+    int updateEmployee(Employee employee);
 //
 //    @Delete("delete * from tb_emp where id = #{id}")
-//    int deleteEmployeeById(Integer id);
+    int deleteEmployeeById(Integer id);
 }

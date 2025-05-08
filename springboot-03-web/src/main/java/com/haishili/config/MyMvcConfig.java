@@ -1,5 +1,7 @@
 package com.haishili.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -32,5 +34,15 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginHandlerInterceptor()).
                 addPathPatterns("/**").
                 excludePathPatterns("/user/login","/index.html","/css/*","/img/*","/js/*","/");
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI().info(
+                new Info()
+                        .title("接口文档")
+                        .description("一个简单CURD项目的接口文档")
+                        .version("1.0")
+        );
     }
 }

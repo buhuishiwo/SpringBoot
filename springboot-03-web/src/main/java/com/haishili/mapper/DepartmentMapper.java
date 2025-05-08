@@ -14,4 +14,5 @@ public interface DepartmentMapper {
     List<Department> findAll();
 
     Department findById(Integer id);
+    int addDept(Department department);
 }

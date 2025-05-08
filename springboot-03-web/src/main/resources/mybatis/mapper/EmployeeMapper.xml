@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haishili.mapper.EmployeeMapper">
+    <insert id="addEmployee" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_emp(lastname, email, gender, deptid, birthday)
+        VALUES(#{lastname}, #{email}, #{gender}, #{deptid}, #{birthday})
+    </insert>
+    <update id="updateEmployee">
+
+    </update>
+    <delete id="deleteEmployeeById">
+
+    </delete>
 
 
     <select id="findAll" resultType="Employee">
@@ -18,7 +28,17 @@
                  LEFT JOIN tb_dept d ON e.deptid = d.deptid
     </select>
 
-    <select id="findById" >
-
+    <select id="findById" resultType="employee">
+        SELECT
+            e.id,
+            e.lastname AS lastName,
+            e.email,
+            e.deptid AS deptId,
+            e.gender,
+            e.birthday,
+            d.name AS deptName
+        FROM tb_emp e
+                 LEFT JOIN tb_dept d ON e.deptid = d.deptid
+        where e.id = #{id}
     </select>
 </mapper>
